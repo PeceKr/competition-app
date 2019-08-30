@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Competition.App.Common.ViewModels.Teams.TeamsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Teams</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Teams")" class="btn btn-primary">
+        <i class="fa fa-plus" style="color : white"></i>
+        Add new
+    </a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeamName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th></th>
+    </tr>
+    <tbody id="teams-body">
+        @foreach (var item in Model)
+        {
+            <tr id="team-@item.TeamId">
+                <td style="display:none">
+                    @Html.DisplayFor(modelItem => item.TeamId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit","Teams", new { teamId = item.TeamId })" class="btn btn-warning btn-xs"> <i class="fa fa-pencil"></i>Edit</a>
+                    <a class="btn btn-danger btn-xs" onclick="deleteTeam(@item.TeamId);return false"><i class="fa fa-remove"></i>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<input type="hidden" id="forgeryToken" value="@HtmlHelpers.GetAntiForgeryToken()" />
+
+@section Scripts {
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    <script>
+        function deleteTeam(teamId) {
+            $.ajax({
+                url: '@Url.Action("DeleteTeam","Teams")',
+                data: { teamId: teamId },
+                dataType: "json",
+                headers: {
+                    'VerificationToken': $("#forgeryToken").val()
+                },
+                success: function () {
+                    $('#teams-body').find('#team-' + teamId).remove();
+                    toastr.success('Team has been deleted');
+                },
+                error: function (err) {
+                    console.log(err);
+                    toastr.error('Team was not deleted');
+                }
+
+            });
+        }
+    </script>
+}

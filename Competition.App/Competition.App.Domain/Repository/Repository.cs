@@ -127,7 +127,7 @@ namespace Competition.App.Domain.Repository
         /// </summary>
         /// <typeparam name="T">type</typeparam>
         /// <returns>List of items</returns>
-        public ICollection<T> GetAll<T>() where T : class
+        public List<T> GetAll<T>() where T : class
         {
             return _dbContext.Set<T>().ToList();
         }
