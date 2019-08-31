@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.table thead {
+    background-color : gainsboro !important;
+}
+
+.table caption {
+    color : black !important;
+}

@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelFactory.cs" />
+    <Compile Include="ModelFactory\IModelsFactory.cs" />
+    <Compile Include="ModelFactory\ModelsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Competition\CompetitionViewModel.cs" />
     <Compile Include="ViewModels\Teams\TeamsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

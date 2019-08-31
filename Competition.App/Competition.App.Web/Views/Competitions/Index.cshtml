@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Competition.App.Common.ViewModels.Competition.CompetitionViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a class="btn btn-info" href="@Url.Action("Create","Competitions")"><i class="fa fa-plus"></i> Add new</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CompetitionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateStarted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="competitons-body">
+        @foreach (var item in Model)
+        {
+            <tr id="@item.CompetitionId">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompetitionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateStarted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a class="btn btn-xs btn-info"><i class="fa fa-list"></i> Standings</a>
+                    <a class="btn btn-xs btn-danger" onclick="removeCompetition(@item.CompetitionId); return false"><i class="fa fa-trash-o"></i> Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+@section Scripts {
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script>
+        function removeCompetition(competitionId) {
+            $.ajax({
+                url: '@Url.Action("Delete","Competitions")',
+                type : 'POST',
+                data: { competitionId: competitionId },
+                success: function (data) {
+                    if (data.success) {
+                        $('#competitons-body').find('#' + competitionId).remove();
+                        toastr.success("Successfully deleted competition");
+                    } else {
+                        toastr.error("Failed to delete competiton");
+                    }
+                },
+                error: function (err) {
+                    console.log(err);
+                    toastr.error("Failed to delete competiton");
+                }
+            })
+        }
+    </script>
+}

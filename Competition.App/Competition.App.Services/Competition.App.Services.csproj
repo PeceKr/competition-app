@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompetitionServices\CompetitionServices.cs" />
+    <Compile Include="CompetitionServices\ICompetitionServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TeamsServices\ITeamsServices.cs" />
     <Compile Include="TeamsServices\TeamsServices.cs" />

@@ -1,0 +1,89 @@
+﻿@model Competition.App.Common.ViewModels.Competition.CompetitionViewModel
+@using Competition.App.Web.WebHelpers
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create competition</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CompetitionName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CompetitionName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CompetitionName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <hr />
+        <div>
+            @Html.DropDownList("Teams", SelectedListExtension.GetAllTeams())
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-5 ">
+                <a href="#" onclick="createCompetition();return false" class="btn btn-success pull-right"> Create</a>
+                <a href="@Url.Action("Index","Competitions")" class="btn btn-danger pull-right"> Cancel</a>
+
+            </div>
+        </div>
+    </div>
+}
+<link href="~/Content/dual-listbox.css" rel="stylesheet" />
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/dual-listbox.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script>
+        const dualListbox = new DualListbox('select', {
+            availableTitle: 'Teams',
+            selectedTitle: 'Selected teams',
+        });
+
+        function createCompetition() {
+
+            if ($('#CompetitionName').val() == '') {
+                toastr.error("Competition name is required");
+                return false;
+            }
+
+            if ($('.dual-listbox__selected >li').length < 2) {
+                toastr.warning('Please select at least 2 competitors');
+                return false;
+            }
+
+
+            var teams = new Array();
+
+            $('.dual-listbox__selected >li').each(function (i, li) {
+                teams.push($(li).attr('data-id'));
+            });
+
+            $.ajax({
+                url: '@Url.Action("Create","Competitions")',
+                type: 'POST',
+                traditional: true,
+                data: { CompetitionName: $('#CompetitionName').val(), TeamIds: teams },
+                success: function (data) {
+                    if (data.success) {
+                        window.location.href = "/Competitions/Index";
+                    }
+                },
+                error: function (err) {
+                    toastr.error('Cannot create the competition');
+                    console.log(err);
+                }
+            });
+
+        }
+
+    </script>
+}

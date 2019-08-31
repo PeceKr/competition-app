@@ -1,4 +1,6 @@
+using Competition.App.Common.ModelFactory;
 using Competition.App.Domain.Repository;
+using Competition.App.Services.CompetitionServices;
 using Competition.App.Services.TeamsServices;
 using System.Web.Mvc;
 using Unity;
@@ -15,6 +17,10 @@ namespace Competition.App.Web
             container.RegisterType<IRepository, Repository>();
 
             container.RegisterType<ITeamsServices, TeamsServices>();
+
+            container.RegisterType<ICompetitionServices, CompetitionServices>();
+
+            container.RegisterType<IModelsFactory, ModelsFactory>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }

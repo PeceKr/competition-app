@@ -24,7 +24,8 @@ namespace Competition.App.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                    "~/Content/fontawesome/font-awesome.min.css" ));
         }
     }
 }

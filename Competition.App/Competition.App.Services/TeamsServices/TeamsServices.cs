@@ -1,4 +1,5 @@
 ﻿using Competition.App.Common;
+using Competition.App.Common.ModelFactory;
 using Competition.App.Common.ViewModels.Teams;
 using Competition.App.Domain.Entities;
 using Competition.App.Domain.Repository;
@@ -9,17 +10,18 @@ namespace Competition.App.Services.TeamsServices
     public class TeamsServices : ITeamsServices
     {
         private readonly IRepository _repository;
-
-        public TeamsServices(IRepository repository)
+        private readonly IModelsFactory _modelsFactory;
+        public TeamsServices(IRepository repository, IModelsFactory modelsFactory)
         {
             _repository = repository;
+            _modelsFactory = modelsFactory;
         }
 
         public void CreateTeam(TeamsViewModel teamModel)
         {
             try
             {
-                var team = ModelFactory.CreateTeamsEntityObject(teamModel);
+                var team = _modelsFactory.CreateTeamsEntityObject(teamModel);
 
                 _repository.Insert(team);
 
@@ -60,7 +62,7 @@ namespace Competition.App.Services.TeamsServices
 
                 if (team == null) throw new Exception("Not found");
 
-                var editedTeam = ModelFactory.MapTeamObjectForEdit(team, teamsViewModel);
+                var editedTeam = _modelsFactory.MapTeamObjectForEdit(team, teamsViewModel);
 
                 _repository.Update(editedTeam);
                 _repository.Save();
@@ -75,7 +77,7 @@ namespace Competition.App.Services.TeamsServices
         {
             try
             {
-                var teams = ModelFactory.ReturnTeamsViewModelList(_repository.GetAll<Teams>());
+                var teams = _modelsFactory.ReturnTeamsViewModelList(_repository.GetAll<Teams>());
 
                 return teams;
             }
@@ -89,7 +91,7 @@ namespace Competition.App.Services.TeamsServices
         {
             try
             {
-                var team = ModelFactory.
+                var team = _modelsFactory.
                     CreateTeamViewModel(_repository.SingleOrDefault<Teams>(x => x.TeamId == teamId));
 
                 return team;
