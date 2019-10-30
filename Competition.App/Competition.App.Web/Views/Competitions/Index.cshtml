@@ -4,49 +4,49 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+    <div class="competition-contaier">
+        <p>
+            <a class="btn btn-info" href="@Url.Action("Create","Competitions")"><i class="fa fa-plus"></i> Add new</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompetitionName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateStarted)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="competitons-body">
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.CompetitionId">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CompetitionName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateStarted)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>
+                        <td>
+                            <a class="btn btn-xs btn-info"><i class="fa fa-list"></i> Standings</a>
+                            <a href="@Url.Action("Index","Matches",new {competitionId = item.CompetitionId })" class="btn btn-xs btn-warning"><i class="fa fa-calendar"></i> Fixtures</a>
+                            <a class="btn btn-xs btn-danger" onclick="removeCompetition(@item.CompetitionId); return false"><i class="fa fa-trash-o"></i> Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
-<p>
-    <a class="btn btn-info" href="@Url.Action("Create","Competitions")"><i class="fa fa-plus"></i> Add new</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CompetitionName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateStarted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody id="competitons-body">
-        @foreach (var item in Model)
-        {
-            <tr id="@item.CompetitionId">
-                <td>
-                    @Html.DisplayFor(modelItem => item.CompetitionName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateStarted)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    <a class="btn btn-xs btn-info"><i class="fa fa-list"></i> Standings</a>
-                    <a class="btn btn-xs btn-danger" onclick="removeCompetition(@item.CompetitionId); return false"><i class="fa fa-trash-o"></i> Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-
-</table>
-
+        </table>
+    </div>
 
 <link href="~/Content/toastr.min.css" rel="stylesheet" />
 @section Scripts {

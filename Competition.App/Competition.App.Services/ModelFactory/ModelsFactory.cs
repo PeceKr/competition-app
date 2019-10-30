@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Competition.App.Common.ViewModels.Competition;
+using Competition.App.Common.ViewModels.Matches;
 using Competition.App.Common.ViewModels.Teams;
 using Competition.App.Domain.Entities;
 using Competition.App.Domain.Repository;
 
-namespace Competition.App.Common.ModelFactory
+namespace Competition.App.Services.ModelFactory
 {
     public class ModelsFactory : IModelsFactory
     {
@@ -31,6 +32,28 @@ namespace Competition.App.Common.ModelFactory
             _repository.Save();
 
             return competitionEntity;
+        }
+
+        public Matches CreateMatchEntity(MatchesViewModel model)
+        {
+            return new Matches
+            {
+                HomeTeamId = model.HomeId,
+                AwayTeamId = model.AwayId,
+                StartTime = model.StartTime,
+                CompetitionId = model.CompetitionId
+            };
+        }
+
+        public List<MatchesViewModel> CreateMatchesViewModel(List<Matches> matches)
+        {
+            return matches.Select(x => new MatchesViewModel
+            {
+                CompetitionId = x.CompetitionId,
+                HomeTeamName = x.HomeTeam.TeamName,
+                AwayTeamName = x.AwayTeam.TeamName,
+                StartTime = x.StartTime
+            }).ToList();
         }
 
         public Teams CreateTeamsEntityObject(TeamsViewModel viewModel)

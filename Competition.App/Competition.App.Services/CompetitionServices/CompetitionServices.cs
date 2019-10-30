@@ -2,7 +2,7 @@
 using Competition.App.Common.ViewModels.Competition;
 using Competition.App.Domain.Entities;
 using Competition.App.Domain.Repository;
-using Competition.App.Common.ModelFactory;
+using Competition.App.Services.ModelFactory;
 
 namespace Competition.App.Services.CompetitionServices
 {

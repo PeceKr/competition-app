@@ -1,8 +1,7 @@
-﻿using Competition.App.Common;
-using Competition.App.Common.ModelFactory;
-using Competition.App.Common.ViewModels.Teams;
+﻿using Competition.App.Common.ViewModels.Teams;
 using Competition.App.Domain.Entities;
 using Competition.App.Domain.Repository;
+using Competition.App.Services.ModelFactory;
 using System;
 using System.Collections.Generic;
 namespace Competition.App.Services.TeamsServices

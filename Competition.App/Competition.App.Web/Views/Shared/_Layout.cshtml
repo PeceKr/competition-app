@@ -19,9 +19,23 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Competitions", "Index", "Competitions")</li>
-                    <li>@Html.ActionLink("Teams", "Index", "Teams")</li>
-                    <li>@Html.ActionLink("Matches", "Contact", "Home")</li>
+                    <li>
+                        <a href="@Url.Action("Index","Home")">
+                            
+                            <img class="menu-icon" src="~/Content/home.png" />  Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Competitions")">
+                            <img class="menu-icon" src="~/Content/icons8-world-cup-50.png" /> Competitions
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","Teams")">
+
+                            <img class="menu-icon" src="~/Content/icons8-teams-50.png" />  Teams
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

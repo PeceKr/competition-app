@@ -1,0 +1,62 @@
+﻿@model Competition.App.Common.ViewModels.Matches.MatchesViewModel
+@using Competition.App.Web.WebHelpers
+@{
+    ViewBag.Title = "CreateMatch";
+}
+
+<h2>New match</h2>
+
+@using (Html.BeginForm("CreateMatch", "Matches", FormMethod.Post, new { @id = "match-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.CompetitionId)
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HomeTeamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.HomeId, SelectedListExtension.GetAllTeams(), "Select home team", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.HomeId, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AwayTeamName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.AwayId, SelectedListExtension.GetAllTeams(), "Select away team", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.AwayId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TimeStart, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.TimeStart, new { @type = "datetime-local", @class = "form-control datepicker" })
+                @Html.ValidationMessageFor(model => model.TimeStart, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $('#match-form').submit(function (e) {
+            debugger;
+            if ($('#HomeId').val() === $('#AwayId').val()) {
+                toastr.warning('Home and away team must be different teams');
+                e.preventDefault();
+                return false;
+            }
+        });
+    </script>
+}

@@ -15,7 +15,6 @@ namespace Competition.App.Domain.Repository
         void Delete<T>(T entity) where T : class;
         void Delete<T>(int id) where T : class;
         T GetById<T>(int intId) where T : class;
-        void UpdateEntity<T>(int originalModelId, T newEntity) where T : class;
-        List<T> GetAll<T>() where T : class;
+        List<T> GetAll<T>(string tablesToInclude ="") where T : class;
     }
 }

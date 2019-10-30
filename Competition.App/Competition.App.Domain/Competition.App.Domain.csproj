@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.4\lib\netstandard2.0\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -39,6 +42,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -56,9 +60,15 @@
     <Compile Include="Migrations\201908301725131_Init.Designer.cs">
       <DependentUpon>201908301725131_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909130514417_AddedGetTeamsSP.cs" />
+    <Compile Include="Migrations\201909130514417_AddedGetTeamsSP.Designer.cs">
+      <DependentUpon>201909130514417_AddedGetTeamsSP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\MatchRepository\IMatchRepository.cs" />
+    <Compile Include="Repository\MatchRepository\MatchRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +79,15 @@
     <EmbeddedResource Include="Migrations\201908301725131_Init.resx">
       <DependentUpon>201908301725131_Init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909130514417_AddedGetTeamsSP.resx">
+      <DependentUpon>201909130514417_AddedGetTeamsSP.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Competition.App.Common\Competition.App.Common.csproj">
+      <Project>{0e6168c2-e6e1-4bbf-a699-a834d0f37ebc}</Project>
+      <Name>Competition.App.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

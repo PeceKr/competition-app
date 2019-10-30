@@ -1,9 +1,10 @@
 ﻿using Competition.App.Common.ViewModels.Competition;
+using Competition.App.Common.ViewModels.Matches;
 using Competition.App.Common.ViewModels.Teams;
 using Competition.App.Domain.Entities;
 using System.Collections.Generic;
 
-namespace Competition.App.Common.ModelFactory
+namespace Competition.App.Services.ModelFactory
 {
     public interface IModelsFactory
     {
@@ -18,5 +19,9 @@ namespace Competition.App.Common.ModelFactory
         List<CompetitionViewModel> ReturnCompetitionsViewModel(List<Competitions> competitions);
 
         Competitions CreateCompetitionEntity(CompetitionViewModel model);
+
+        Matches CreateMatchEntity(MatchesViewModel model);
+
+        List<MatchesViewModel> CreateMatchesViewModel(List<Matches> matches);
     }
 }

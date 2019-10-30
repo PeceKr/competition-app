@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Competition.App.Common.ViewModels.Matches.MatchesViewModel>
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("CreateMatch","Matches", new { competitionId = ViewBag.CompatitionId})">Create match</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomeTeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AwayTeamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Result)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Finished)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="matches-table">
+        @foreach (var item in Model)
+        {
+            <tr id="@item.MatchId">
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HomeTeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AwayTeamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Result)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Finished)
+                </td>
+                <td>
+                    @if (!item.Finished)
+                    {
+                        <a class="btn btn-xs btn-info" onclick="enterResult('@item.HomeTeamName','@item.AwayTeamName','@item.MatchId' )"><i class="fa fa-pencil"></i>Enter result</a>
+                        <a href="#" onclick="deleteMatch(@item.MatchId)" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i>delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!-- Trigger the modal with a button -->
+@*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#enter-result-modal">Open Modal</button>*@
+
+@Html.Partial("~/Views/Partials/_enterResultView.cshtml")
+<input type="hidden" id="forgeryToken" value="@HtmlHelpers.GetAntiForgeryToken()" />
+
+@section Scripts  {
+    <script>
+        function deleteMatch(matchId) {
+            $.ajax({
+                url: '@Url.Action("DeleteMatch","Matches")',
+                data: { matchId: matchId },
+                headers: {
+                    'VerificationToken': $("#forgeryToken").val()
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $('#matches-table').find(`#${matchId}`).remove();
+                        toastr.success('Match has been deleted');
+                    }
+                    else
+                        toastr.error('Match has not been deleted');
+                }
+            });
+        }
+
+        function enterResult(homeTeam, awayTeam, matchId) {
+            $('#homeTeam').text(homeTeam);
+            $('#awayTeam').text(awayTeam);
+            $('#matchId').val(matchId);
+            $('#enter-result-modal').modal('show');
+        }
+        function saveResult(homeTeamScore, AwayTeamScore, matchId) {
+            $.ajax({
+                 url: '@Url.Action("SaveResult","Matches")',
+                data: { homeScore: homeTeamScore, awayScore: AwayTeamScore , matchId :matchId},
+                headers: {
+                    'VerificationToken': $("#forgeryToken").val()
+                },
+                success: function (data) {
+                    if (data.success) {                       
+                        toastr.success('Result has been saved');
+                    }
+                    else
+                        toastr.error('Result was not been saved');
+                }
+            });
+            })
+        }
+       
+    </script>
+}

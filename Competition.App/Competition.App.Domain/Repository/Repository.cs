@@ -127,9 +127,16 @@ namespace Competition.App.Domain.Repository
         /// </summary>
         /// <typeparam name="T">type</typeparam>
         /// <returns>List of items</returns>
-        public List<T> GetAll<T>() where T : class
+        public List<T> GetAll<T>(string tabelsToInclude) where T : class
         {
-            return _dbContext.Set<T>().ToList();
+            if (string.IsNullOrEmpty(tabelsToInclude))
+            {
+                return _dbContext.Set<T>().ToList();
+            }
+            else
+            {
+                return _dbContext.Set<T>().Include(tabelsToInclude).ToList();
+            }
         }
 
 

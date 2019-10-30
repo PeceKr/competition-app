@@ -13,7 +13,7 @@ namespace Competition.App.Web.WebHelpers
         public static IEnumerable<SelectListItem> GetAllTeams()
         {
 
-            var teams = _objRepository.GetAll<Teams>();
+            var teams = _objRepository.GetAll<Teams>().OrderBy(x=>x.TeamName);
 
             List<SelectListItem> lstTeams = teams.Select(s => new SelectListItem()
             {

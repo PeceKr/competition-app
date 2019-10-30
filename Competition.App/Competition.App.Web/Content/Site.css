@@ -7,6 +7,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    padding-top : 25px;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -29,4 +30,12 @@ textarea {
 
 .table caption {
     color : black !important;
+}
+
+.teams-background {
+    background-image: url('Icons8-Windows-8-Sports-Teams.ico');
+}
+
+.menu-icon {
+    width : 30px;
 }
