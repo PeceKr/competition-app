@@ -84,6 +84,24 @@ namespace Competition.App.Web.Controllers
             }
         }
 
+        [AjaxValidateAntiForgeryToken]
+        public JsonResult SaveResult (int homeScore, int awayScore, int matchId)
+        {
+            try
+            {
+                 _matchServices.SaveResult(homeScore, awayScore, matchId);
+
+
+                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+         
+        }
+
 
     }
 }

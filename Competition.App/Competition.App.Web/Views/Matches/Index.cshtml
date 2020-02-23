@@ -87,29 +87,14 @@
             });
         }
 
-        function enterResult(homeTeam, awayTeam, matchId) {
+        function enterResult(homeTeam, awayTeam, matchId) {            
             $('#homeTeam').text(homeTeam);
             $('#awayTeam').text(awayTeam);
-            $('#matchId').val(matchId);
+            $('#matchId').text(matchId);
             $('#enter-result-modal').modal('show');
         }
-        function saveResult(homeTeamScore, AwayTeamScore, matchId) {
-            $.ajax({
-                 url: '@Url.Action("SaveResult","Matches")',
-                data: { homeScore: homeTeamScore, awayScore: AwayTeamScore , matchId :matchId},
-                headers: {
-                    'VerificationToken': $("#forgeryToken").val()
-                },
-                success: function (data) {
-                    if (data.success) {                       
-                        toastr.success('Result has been saved');
-                    }
-                    else
-                        toastr.error('Result was not been saved');
-                }
-            });
-            })
-        }
+
+   
        
     </script>
 }

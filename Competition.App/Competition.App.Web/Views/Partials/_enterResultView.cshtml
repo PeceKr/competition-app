@@ -1,7 +1,7 @@
 ﻿<!-- Modal -->
 <div id="enter-result-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
+        <span id="matchId" style="display:none"></span>
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
@@ -12,19 +12,42 @@
                 <div class="form-group">
                     <div class="col-md-12">
                         <label id="homeTeam" class="col-md-3"></label>
-                        <input type="number" class="col-md-2" />
+                        <input type="number" id="homeScore" class="col-md-2" />
                         <label class="col-md-1">:</label>
-                        <input type="number" class="col-md-2" />
+                        <input type="number" id="awayScore" class="col-md-2" />
                         <label id="awayTeam" class="col-md-3"></label>
 
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="saveResult();">Save</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
 
     </div>
 </div>
+<script>
+    function saveResult() {
+        debugger;
+        var homeTeamScore = $('#homeScore').val();
+        var awayTeamScore = $('#awayScore').val();
+        var matchId = $('#matchId').text();
+            $.ajax({
+                 url: '@Url.Action("SaveResult","Matches")',
+                data: { homeScore: homeTeamScore, awayScore: awayTeamScore, matchId: matchId },
+                method : 'POST',
+                headers: {
+                    'VerificationToken': $("#forgeryToken").val()
+                },
+                success: function (data) {
+                    if (data.success) {                       
+                        toastr.success('Result has been saved');
+                    }
+                    else
+                        toastr.error('Result was not been saved');
+                }
+            });        
+        }
+</script>
