@@ -4,7 +4,8 @@
 }
 
 <div class="jumbotron">
-   <p>Competition APP</p>
+    <p>Competition APP </p>
+    <a href="#" data-toggle="modal" data-target="#Rules"><i class="fa fa-gamepad" data-toggle="modal" data-target="#Rules"></i>Rules</a>
 </div>
 
 <div>
@@ -21,3 +22,4 @@
         Match Results :  @Model.MatchResults
     </div>
 </div>
+@Html.Partial("~/Views/Partials/_rules.cshtml")

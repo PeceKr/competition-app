@@ -231,6 +231,7 @@
     <Content Include="Views\Matches\Index.cshtml" />
     <Content Include="Views\Partials\_enterResultView.cshtml" />
     <Content Include="Views\Competitions\Standings.cshtml" />
+    <Content Include="Views\Partials\_rules.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
