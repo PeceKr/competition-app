@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Competition.App.Services.HomeService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,19 @@ namespace Competition.App.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IHomeService _homeService;
+
+
+        public HomeController(IHomeService homeService)
+        {
+            _homeService = homeService;
+        }
+
         public ActionResult Index()
         {
-            return View();
+            var homeStats = _homeService.getDashBoardStats();
+
+            return View(homeStats);
         }
 
         public ActionResult About()

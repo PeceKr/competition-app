@@ -66,10 +66,14 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CompetitionRepository\CompetitionRepository.cs" />
+    <Compile Include="Repository\CompetitionRepository\ICompetitionRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\MatchRepository\IMatchRepository.cs" />
     <Compile Include="Repository\MatchRepository\MatchRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\TeamsRepository\ITeamsRepository.cs" />
+    <Compile Include="Repository\TeamsRepository\TeamsRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

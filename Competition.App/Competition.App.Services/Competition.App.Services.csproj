@@ -43,6 +43,8 @@
   <ItemGroup>
     <Compile Include="CompetitionServices\CompetitionServices.cs" />
     <Compile Include="CompetitionServices\ICompetitionServices.cs" />
+    <Compile Include="HomeService\HomeService.cs" />
+    <Compile Include="HomeService\IHomeService.cs" />
     <Compile Include="MatchServices\IMatchServices.cs" />
     <Compile Include="MatchServices\MatchesServices.cs" />
     <Compile Include="ModelFactory\IModelsFactory.cs" />

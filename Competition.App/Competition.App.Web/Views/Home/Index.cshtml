@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Competition.App.Common.ViewModels.Home.DashboardResultsViewModel
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,3 +7,17 @@
    <p>Competition APP</p>
 </div>
 
+<div>
+    <div>
+        Active Competitions :  @Model.ActiveCompettions
+    </div>
+    <div>
+        Active Teams :  @Model.ActiveTeams
+    </div>
+    <div>
+        Open Matches :  @Model.MatchesInProgress
+    </div>
+    <div>
+        Match Results :  @Model.MatchResults
+    </div>
+</div>

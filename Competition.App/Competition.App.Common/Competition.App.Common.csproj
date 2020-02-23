@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Competition\CompetitionViewModel.cs" />
+    <Compile Include="ViewModels\Home\DashboardResultsViewModel.cs" />
     <Compile Include="ViewModels\Matches\MatchesViewModel.cs" />
     <Compile Include="ViewModels\Teams\TeamsViewModel.cs" />
   </ItemGroup>
