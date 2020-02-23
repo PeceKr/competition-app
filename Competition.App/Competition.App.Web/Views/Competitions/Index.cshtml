@@ -37,7 +37,7 @@
                             @Html.DisplayFor(modelItem => item.Status)
                         </td>
                         <td>
-                            <a class="btn btn-xs btn-info"><i class="fa fa-list"></i> Standings</a>
+                            <a href="@Url.Action("Standings","Competitions",new {competitionId = item.CompetitionId })" class="btn btn-xs btn-info"><i class="fa fa-list"></i> Standings</a>
                             <a href="@Url.Action("Index","Matches",new {competitionId = item.CompetitionId })" class="btn btn-xs btn-warning"><i class="fa fa-calendar"></i> Fixtures</a>
                             <a class="btn btn-xs btn-danger" onclick="removeCompetition(@item.CompetitionId); return false"><i class="fa fa-trash-o"></i> Delete</a>
                         </td>

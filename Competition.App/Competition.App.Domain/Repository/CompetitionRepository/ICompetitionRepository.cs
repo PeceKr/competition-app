@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Competition.App.Common.ViewModels.Competition;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,7 @@ namespace Competition.App.Domain.Repository.CompetitionRepository
     public interface ICompetitionRepository
     {
         int GetCompetitionsCount();
+
+        CompetitionStandingsViewModel GetCompetitionStandings(int competitionId);
     }
 }

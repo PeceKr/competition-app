@@ -2,6 +2,7 @@
 using Competition.App.Common.ViewModels.Competition;
 using Competition.App.Domain.Entities;
 using Competition.App.Domain.Repository;
+using Competition.App.Domain.Repository.CompetitionRepository;
 using Competition.App.Services.ModelFactory;
 
 namespace Competition.App.Services.CompetitionServices
@@ -10,11 +11,13 @@ namespace Competition.App.Services.CompetitionServices
     {
         private readonly IRepository _repository;
         private readonly IModelsFactory _modelFactory;
+        private readonly ICompetitionRepository _competitionRepository;
 
-        public CompetitionServices(IRepository repository, IModelsFactory modelsFactory)
+        public CompetitionServices(IRepository repository, IModelsFactory modelsFactory, ICompetitionRepository competitionRepository )
         {
             _repository = repository;
             _modelFactory = modelsFactory;
+            _competitionRepository = competitionRepository;
         }
 
         public void Create(CompetitionViewModel model)
@@ -56,6 +59,19 @@ namespace Competition.App.Services.CompetitionServices
             }
             catch 
             {
+                throw;
+            }
+        }
+
+        public CompetitionStandingsViewModel GetStandings(int competitionId)
+        {
+            try
+            {
+                return _competitionRepository.GetCompetitionStandings(competitionId);
+            }
+            catch (System.Exception)
+            {
+
                 throw;
             }
         }

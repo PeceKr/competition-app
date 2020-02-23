@@ -57,6 +57,7 @@ namespace Competition.App.Services.MatchServices
 
                 match.HomeScore = homeScore;
                 match.AwayScore = awayScore;
+                match.Finished = true;
 
                 _repository.Update(match);
                 _repository.Save();

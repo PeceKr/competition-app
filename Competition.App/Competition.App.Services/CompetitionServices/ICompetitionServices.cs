@@ -9,5 +9,7 @@ namespace Competition.App.Services.CompetitionServices
 
         List<CompetitionViewModel> GetAll();
         void Delete(int competitionId);
+
+        CompetitionStandingsViewModel GetStandings(int competitionId);
     }
 }

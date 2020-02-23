@@ -70,5 +70,22 @@ namespace Competition.App.Web.Controllers
                 throw;
             }
         }
+
+        [HttpGet]        
+        public ActionResult Standings (int competitionId)
+        {
+            try
+            {
+                var standings = _competitionService.GetStandings(competitionId);
+
+                return View(standings);
+            }
+            catch (System.Exception)
+            {
+
+                // Handle and log the error 
+                throw;
+            }
+        }
     }
 }
